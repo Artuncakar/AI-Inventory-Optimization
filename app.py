@@ -41,10 +41,12 @@ tedarik_suresi = st.sidebar.slider("Tedarik Süresi (Gün)", 1, 14, 5)
 
 st.sidebar.markdown("---")
 st.sidebar.header("🛡️ Risk Yönetimi")
-hizmet_seviyesi = st.sidebar.select_slider(
-    "Hedef Hizmet Seviyesi (%)",
-    options=[80, 85, 90, 95, 98, 99],
-    value=95,
+hizmet_seviyesi = st.sidebar.slider(
+    "Hedef Hizmet Seviyesi (%)", 
+    min_value=80, 
+    max_value=99, 
+    value=95, 
+    step=1,
     help="Müşteriye 'yok çekmeme' olasılığınız."
 )
 
@@ -76,5 +78,6 @@ ax.axhline(y=rop, color='orange', linestyle=':', label="Yeni Sipariş Noktası (
 ax.fill_between(gelecek_tarihler, aylik_talep/30, rop, color='orange', alpha=0.1, label="Güvenlik Tamponu")
 ax.legend()
 st.pyplot(fig)
+
 
 st.info(f"💡 **Mühendislik Analizi:** %{hizmet_seviyesi} hizmet seviyesini korumak için {int(guvenlik_stogu)} adet güvenlik stoğu tutulmaktadır. Toplam maliyet minimizasyonu için her siparişte {int(eoq)} adet ürün getirilmelidir.")
